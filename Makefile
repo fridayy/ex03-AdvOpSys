@@ -1,7 +1,7 @@
 all: test_open test_read test_write test_open_4
 
 test_open:
-	gcc TestOpen.c ./unity/unity.c -o bin/TestOpen
+	gcc TestOpen.c TestFileHelper.c ./unity/unity.c -o bin/TestOpen
 
 test_read:
 	gcc TestRead.c TestFileHelper.c ./unity/unity.c -o bin/TestRead

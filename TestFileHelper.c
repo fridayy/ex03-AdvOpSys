@@ -7,6 +7,7 @@
 char * createTestFile(char *fileName) {
     if(fopen(fileName, "r") == NULL) {
         FILE *fp = fopen(fileName, "w");
+        fprintf(fp, "");
         fclose(fp);
     }
     return fileName;

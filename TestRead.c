@@ -44,7 +44,7 @@ void test_ReadEmptyFile(void) {
 }
 
 void test_ReadFromSameFileDescriptor(void) {
-    char *fileName = createTestFileWithContent(16, "300Bytes.txt");
+    char *fileName = createTestFileWithContent(16, "smallfile.txt");
     int fd = open(fileName, O_RDONLY);
     char buffer1[10];
     char buffer2[6];
@@ -54,6 +54,7 @@ void test_ReadFromSameFileDescriptor(void) {
     remove(fileName);
     printf("Bytes read: %zd from %s (%d bytes)\n", bytesRead1, fileName, 16);
     printf("Bytes read: %zd from %s (%d bytes)\n", bytesRead2, fileName, 16);
+
     TEST_ASSERT_EQUAL(10, bytesRead1);
     TEST_ASSERT_EQUAL(6, bytesRead2);
 }

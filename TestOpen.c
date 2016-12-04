@@ -3,13 +3,19 @@
 //
 #include "unity/unity.h"
 #include <fcntl.h>
+#include "TestFileHelper.h"
+#include <unistd.h>
 
 void test_PlainOpenWithInvalidPath(void) {
     TEST_ASSERT_EQUAL(-1, open("invalid Path!", O_RDONLY));
 }
 
 void test_PlainOpenWithValidPath(void) {
-    TEST_ASSERT(open("open.c", O_RDONLY) > 0);
+    char *fileName = createTestFile("valid.txt");
+    int fd = open(fileName, O_RDONLY);
+    TEST_ASSERT(fd >= 3);
+    close(fd);
+    remove(fileName);
 }
 
 void test_PlainOpenWithPrivileges(void) {
@@ -19,23 +25,6 @@ void test_PlainOpenWithPrivileges(void) {
     remove("test.txt");
 }
 
-void removeMultipleTestFiles(int numberOfFiles) {
-    for (int i = 0; i < numberOfFiles; ++i) {
-        char buffer[50];
-        sprintf(buffer, "test%d.txt", i);
-        remove(buffer);
-    }
-}
-
-void createMultipleTestFiles(int numberOfFiles) {
-    for(int i = 0; i < numberOfFiles; i++) {
-        char buffer[50];
-        sprintf(buffer, "test%d.txt", i);
-        FILE *fp = fopen(buffer, "w");
-        fprintf(fp, "test");
-        fclose(fp);
-    }
-}
 
 /*
  * Test 3a:
@@ -58,23 +47,15 @@ void test_ConsecutiveCallsToOpenForDifferentFiles(void) {
     removeMultipleTestFiles(3);
 }
 
-void createTestFile() {
-    if(fopen("test.txt", "r") == NULL) {
-        FILE *fp = fopen("test.txt", "w");
-        fprintf(fp, "test");
-        fclose(fp);
-    }
-}
-
 /*
  * Test 3b:
  *  Consecutive calls to the same file with the same open mode.
  */
 void test_ConsecutiveCallsToOpenForSameFile(void) {
-    createTestFile();
-    int fileDescriptorFirstAccess = open("test.txt", O_RDONLY);
-    int fileDescriptorSecondAccess = open("test.txt", O_RDONLY);
-    int fileDescriptorThirdAccess = open("test.txt", O_RDONLY);
+    char *fileName = createTestFile("consec.txt");
+    int fileDescriptorFirstAccess = open(fileName, O_RDONLY);
+    int fileDescriptorSecondAccess = open(fileName, O_RDONLY);
+    int fileDescriptorThirdAccess = open(fileName, O_RDONLY);
 
     TEST_ASSERT(fileDescriptorFirstAccess < fileDescriptorSecondAccess);
     TEST_ASSERT(fileDescriptorSecondAccess < fileDescriptorThirdAccess);
@@ -82,7 +63,7 @@ void test_ConsecutiveCallsToOpenForSameFile(void) {
     printf("File Descriptor first access \t%d\n", fileDescriptorFirstAccess);
     printf("File Descriptor second access: \t%d\n", fileDescriptorSecondAccess);
     printf("File Descriptor third access: \t%d\n", fileDescriptorThirdAccess);
-    remove("test.txt");
+    remove(fileName);
 }
 
 

@@ -63,13 +63,36 @@ void test_writeInAFileWHenPositionedAtItsEnd(void) {
     remove(fileName);
 }
 
+/*
+ * Since there is no append 2 fds still means overwrite
+ */
 void writeInAFileUsingTwoDifferentDescriptors(void) {
-    char *fileName = createTestFileWithContent(1, "twooverrides.txt");
+    char *fileName = createTestFileWithContent(10, "twooverrides.txt");
     int fd1 = open(fileName, O_RDWR);
     int fd2 = open(fileName, O_RDWR);
     char buffer[5] = { 'b', 'b', 'b', 'b', 'b' };
     ssize_t bytesWritten1 = write(fd1, buffer, 5);
     ssize_t bytesWritten2 = write(fd2, buffer, 5);
+    close(fd1);
+    close(fd2);
+
+    TEST_ASSERT_EQUAL(5, bytesWritten1);
+    TEST_ASSERT_EQUAL(5, bytesWritten2);
+
+    FILE *fp;
+    fp = fopen(fileName,"r");
+    char readBuffer[100];
+    fread(readBuffer, 10, 1, fp);
+    fclose(fp);
+
+    for (int i = 0; i < 5; ++i) {
+        TEST_ASSERT_EQUAL('b', readBuffer[i]);
+    }
+
+    for (int i = 5; i < 10; ++i) {
+        TEST_ASSERT_EQUAL('a', readBuffer[i]);
+    }
+    remove(fileName);
 }
 
 int main(void) {
@@ -77,5 +100,7 @@ int main(void) {
     RUN_TEST(test_OverwriteSomeBytesInAFile);
     RUN_TEST(test_OverwriteMoreBytesThanThereAreInAFile);
     RUN_TEST(test_writeInAFileWHenPositionedAtItsEnd);
+    RUN_TEST(writeInAFileUsingTwoDifferentDescriptors);
+
     return UNITY_END();
 }
