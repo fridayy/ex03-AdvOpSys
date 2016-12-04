@@ -6,3 +6,6 @@
 
 ### CMakeLists ###
 CMakeLists.txt
+
+### BINARIES ###
+bin/

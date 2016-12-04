@@ -63,12 +63,14 @@ void test_writeInAFileWHenPositionedAtItsEnd(void) {
     remove(fileName);
 }
 
-//void writeInAFileUsingTwoDifferentDescriptors(void) {
-//    char *fileName = createTestFileWithContent(1, "override.txt");
-//    int fd1 = open(fileName, O_RDWR);
-//    int fd2 = open(fileName, O_RDWR);
-//    char buffer[5] = { 'b', 'b', 'b', 'b', 'b' };
-//}
+void writeInAFileUsingTwoDifferentDescriptors(void) {
+    char *fileName = createTestFileWithContent(1, "twooverrides.txt");
+    int fd1 = open(fileName, O_RDWR);
+    int fd2 = open(fileName, O_RDWR);
+    char buffer[5] = { 'b', 'b', 'b', 'b', 'b' };
+    ssize_t bytesWritten1 = write(fd1, buffer, 5);
+    ssize_t bytesWritten2 = write(fd2, buffer, 5);
+}
 
 int main(void) {
     UNITY_BEGIN();
