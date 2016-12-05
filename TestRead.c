@@ -55,6 +55,7 @@ void test_ReadFromSameFileDescriptor(void) {
     close(fd);
     remove(fileName);
 
+    printf("RESULTS IN UNEXPECTED BEHAVIOR!");
     TEST_ASSERT_EQUAL(10, bytesRead1);
     TEST_ASSERT_EQUAL(5, bytesRead2);
 }
