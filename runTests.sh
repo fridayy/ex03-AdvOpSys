@@ -13,5 +13,7 @@ printf "\n${RED}############ TEST LSEEK() ################\n${NC}"
 ./bin/TestLseek
 printf "\n${RED}############ TEST MMAP() ################\n${NC}"
 ./bin/TestMmap
+printf "\n${RED}############ TEST CLOSE() ################\n${NC}"
+./bin/TestClose
 printf "\n${RED}############ FINISHED CLEANING UP ################\n${NC}"
 make clean
