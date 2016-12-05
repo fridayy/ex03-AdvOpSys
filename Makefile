@@ -1,20 +1,24 @@
-all: test_open test_read test_write test_open_4
+all: test_open test_read test_write test_lseek test_open_4
 
 test_open:
-	gcc TestOpen.c TestFileHelper.c ./unity/unity.c -o bin/TestOpen
+	gcc -Wall TestOpen.c TestFileHelper.c ./unity/unity.c -o bin/TestOpen
 
 test_read:
-	gcc TestRead.c TestFileHelper.c ./unity/unity.c -o bin/TestRead
+	gcc -Wall TestRead.c TestFileHelper.c ./unity/unity.c -o bin/TestRead
 
 test_write:
-	gcc TestWrite.c TestFileHelper.c ./unity/unity.c -o bin/TestWrite
+	gcc -Wall TestWrite.c TestFileHelper.c ./unity/unity.c -o bin/TestWrite
+
+test_lseek:
+	gcc -Wall TestLseek.c TestFileHelper.c ./unity/unity.c -o bin/TestLseek
 
 test_open_4:
 	gcc -g -Wall openTest4.c -o bin/openTest4
 
 clean:
 	rm -f *.o
-	rm -f bin/TestOpen
-	rm -f bin/openTest4
-	rm -f bin/TestRead
-	rm -f bin/TestWrite
+	rm -f TestOpen
+	rm -f openTest4
+	rm -f TestRead
+	rm -f TestWrite
+	rm -f test.txt

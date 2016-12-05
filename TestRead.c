@@ -12,7 +12,6 @@ void test_ReadBytesFromFile(void) {
     char buffer[500];
     ssize_t bytesRead = read(fd, buffer, 500);
     close(fd);
-    printf("Bytes read: %zd from %s (%d bytes)\n", bytesRead, fileName, 500);
     remove(fileName);
 
     TEST_ASSERT_EQUAL(500, bytesRead);
@@ -24,7 +23,7 @@ void test_TryToReadTooManyBytes(void) {
     char buffer[100];
     ssize_t bytesRead = read(fd, buffer, 100);
     close(fd);
-    printf("Bytes read: %zd from %s (%d bytes)\n", bytesRead, fileName, 50);
+
     remove(fileName);
 
     TEST_ASSERT(bytesRead != 100);
@@ -32,31 +31,32 @@ void test_TryToReadTooManyBytes(void) {
 }
 
 void test_ReadEmptyFile(void) {
-    char *fileName = createTestFile("emptyfile.txt");
-    int fd = open(fileName, O_RDWR);
+    char *fileName = "emptyfile.txt";
+    int fd = open(fileName, O_CREAT, S_IRUSR);
     char buffer[100];
     ssize_t bytesRead = read(fd, buffer, 100);
     close(fd);
-    printf("Bytes read: %zd from %s (%d bytes)\n", bytesRead, fileName, 0);
+
     remove(fileName);
 
     TEST_ASSERT_EQUAL(0, bytesRead);
 }
 
+/**
+ * Reading from the same file descriptor leads to unexpected behavior!
+ */
 void test_ReadFromSameFileDescriptor(void) {
     char *fileName = createTestFileWithContent(16, "smallfile.txt");
     int fd = open(fileName, O_RDONLY);
-    char buffer1[10];
-    char buffer2[6];
+    char buffer1[100];
+    char buffer2[100];
     ssize_t bytesRead1 = read(fd, buffer1, 10);
-    ssize_t bytesRead2 = read(fd, buffer2, 6);
+    ssize_t bytesRead2 = read(fd, buffer2, 5);
     close(fd);
     remove(fileName);
-    printf("Bytes read: %zd from %s (%d bytes)\n", bytesRead1, fileName, 16);
-    printf("Bytes read: %zd from %s (%d bytes)\n", bytesRead2, fileName, 16);
 
     TEST_ASSERT_EQUAL(10, bytesRead1);
-    TEST_ASSERT_EQUAL(6, bytesRead2);
+    TEST_ASSERT_EQUAL(5, bytesRead2);
 }
 
 void test_ReadUsingTwoDifferentDescriptors(void) {
