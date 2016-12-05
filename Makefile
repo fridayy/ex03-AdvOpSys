@@ -1,30 +1,26 @@
 all: test_open test_read test_write test_lseek test_mmap test_close test_open_4
 
 test_open:
-	gcc -Wall TestOpen.c TestFileHelper.c ./unity/unity.c -o bin/TestOpen
+	gcc -Wall ./test/TestOpen.c ./test/TestFileHelper.c ./test/unity/unity.c -o test/bin/TestOpen
 
 test_read:
-	gcc -Wall TestRead.c TestFileHelper.c ./unity/unity.c -o bin/TestRead
+	gcc -Wall ./test/TestRead.c ./test/TestFileHelper.c ./test/unity/unity.c -o test/bin/TestRead
 
 test_write:
-	gcc -Wall TestWrite.c TestFileHelper.c ./unity/unity.c -o bin/TestWrite
+	gcc -Wall ./test/TestWrite.c ./test/TestFileHelper.c ./test/unity/unity.c -o test/bin/TestWrite
 
 test_lseek:
-	gcc -Wall TestLseek.c TestFileHelper.c ./unity/unity.c -o bin/TestLseek
+	gcc -Wall ./test/TestLseek.c ./test/TestFileHelper.c ./test/unity/unity.c -o test/bin/TestLseek
 
 test_mmap:
-	gcc -Wall TestMmap.c TestFileHelper.c ./unity/unity.c -o bin/TestMmap
+	gcc -Wall ./test/TestMmap.c ./test/TestFileHelper.c ./test/unity/unity.c -o test/bin/TestMmap
 
 test_close:
-	gcc -Wall TestClose.c TestFileHelper.c ./unity/unity.c -o bin/TestClose
+	gcc -Wall ./test/TestClose.c ./test/TestFileHelper.c ./test/unity/unity.c -o test/bin/TestClose
 
 test_open_4:
-	gcc -g -Wall openTest4.c -o bin/openTest4
+	gcc -g -Wall ./test/openTest4.c -o test/bin/openTest4
 
 clean:
 	rm -f *.o
-	rm -f TestOpen
-	rm -f openTest4
-	rm -f TestRead
-	rm -f TestWrite
-	rm -f test.txt
+	rm -f ./test/bin/*

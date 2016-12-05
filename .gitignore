@@ -8,4 +8,4 @@
 CMakeLists.txt
 
 ### BINARIES ###
-bin/
+.test/bin/

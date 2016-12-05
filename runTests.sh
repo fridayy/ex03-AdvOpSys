@@ -4,16 +4,16 @@ NC='\033[0m'
 make clean
 make
 printf "\n${RED}############ TEST OPEN() ################\n${NC}"
-./bin/TestOpen
+./test/bin/TestOpen
 printf "\n${RED}############ TEST READ() ################\n${NC}"
-./bin/TestRead
+./test/bin/TestRead
 printf "\n${RED}############ TEST WRITE() ################\n${NC}"
-./bin/TestWrite
+./test/bin/TestWrite
 printf "\n${RED}############ TEST LSEEK() ################\n${NC}"
-./bin/TestLseek
+./test/bin/TestLseek
 printf "\n${RED}############ TEST MMAP() ################\n${NC}"
-./bin/TestMmap
+./test/bin/TestMmap
 printf "\n${RED}############ TEST CLOSE() ################\n${NC}"
-./bin/TestClose
+./test/bin/TestClose
 printf "\n${RED}############ FINISHED CLEANING UP ################\n${NC}"
 make clean
