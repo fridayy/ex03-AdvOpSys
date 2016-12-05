@@ -5,7 +5,7 @@
 #include <unistd.h>
 #include <fcntl.h>
 #include "TestFileHelper.h"
-#include "../src/readchar_R.h"
+#include "../src/count/readchar_R.h"
 
 void test_ReadCharacterHappyPath(void) {
     char *fileName = createFileWithContent("test.txt", "this is a test!");

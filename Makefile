@@ -1,13 +1,13 @@
-all: test_open test_read test_write test_lseek test_mmap test_close test_open_4 libcount.a main
+all: test_open test_read test_write test_lseek test_mmap test_close test_open_4 test_readchar test_count libcount.a main
 
 main.o:
-	gcc -Wall -c ./src/main.c
+	gcc -Wall -c ./src/count/main.c
 
 readchar.o:
-	gcc -Wall -c ./src/readchar_R.c
+	gcc -Wall -c ./src/count/readchar_R.c
 
 count.o:
-	gcc -Wall -c ./src/count_M.c
+	gcc -Wall -c ./src/count/count_M.c
 
 main: libcount.a main.o
 	gcc -o ./bin/count main.o libcount.a
@@ -15,8 +15,11 @@ main: libcount.a main.o
 libcount.a: readchar.o count.o
 	ar -rv libcount.a readchar_R.o count_M.o
 
+test_count:
+	gcc -Wall ./test/TestCount_M.c ./test/TestFileHelper.c ./src/count/count_M.c ./test/unity/unity.c -o bin/TestCount_M
+
 test_readchar:
-	gcc -Wall ./test/TestReadchar.c ./test/TestFileHelper.c ./test/unity/unity.c -o bin/TestReadchar
+	gcc -Wall ./test/TestReadchar_R.c ./test/TestFileHelper.c ./src/count/readchar_R.c ./test/unity/unity.c -o bin/TestReadchar_R
 
 test_open:
 	gcc -Wall ./test/TestOpen.c ./test/TestFileHelper.c ./test/unity/unity.c -o bin/TestOpen
