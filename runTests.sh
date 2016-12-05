@@ -11,5 +11,7 @@ printf "\n${RED}############ TEST WRITE() ################\n${NC}"
 ./bin/TestWrite
 printf "\n${RED}############ TEST LSEEK() ################\n${NC}"
 ./bin/TestLseek
+printf "\n${RED}############ TEST MMAP() ################\n${NC}"
+./bin/TestMmap
 printf "\n${RED}############ FINISHED CLEANING UP ################\n${NC}"
 make clean
