@@ -28,6 +28,15 @@ char * createTestFileWithContent(int numberOfByes, char *fileName) {
     return fileName;
 }
 
+char * createFileWithContent(char *fileName, char *content) {
+    if(fopen(fileName, "r") == NULL) {
+        FILE *fp = fopen(fileName, "w");
+        fprintf(fp, content);
+        fclose(fp);
+    }
+    return fileName;
+}
+
 void removeMultipleTestFiles(int numberOfFiles) {
     for (int i = 0; i < numberOfFiles; ++i) {
         char buffer[50];

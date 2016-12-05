@@ -13,3 +13,5 @@ void createMultipleTestFiles(int numberOfFiles);
 void removeMultipleTestFiles(int numberOfFiles);
 
 char * createTestFileWithContent(int numberOfByes, char *fileName);
+
+char * createFileWithContent(char *fileName, char*content);

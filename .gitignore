@@ -9,3 +9,5 @@ CMakeLists.txt
 
 ### BINARIES ###
 .test/bin/
+
+/bin
