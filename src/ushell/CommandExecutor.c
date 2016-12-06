@@ -9,15 +9,9 @@
 #include <string.h>
 #include <stdio.h>
 
-#define RED   "\x1B[31m"
-#define GRN   "\x1B[32m"
-#define YEL   "\x1B[33m"
-#define BLU   "\x1B[34m"
-#define MAG   "\x1B[35m"
-#define CYN   "\x1B[36m"
-#define WHT   "\x1B[37m"
-#define RESET "\x1B[0m"
-// Thank you: http://stackoverflow.com/questions/3585846/color-text-in-terminal-applications-in-unix#3586005
+#include "Commands.h"
+#include "Colors.h"
+
 
 void executePwd() {
     printf("%s\n", mypwd());
@@ -77,41 +71,44 @@ void executeLs(char *directory, char* arguments) {
 }
 
 
-
 void executeCommand(char **command) {
-    if(strcmp(command[0], "pwd") == 0) {
+    if(strcmp(command[0], PWD) == 0) {
         executePwd();
     }
 
-    if(strcmp(command[0], "ls") == 0) {
+    if(strcmp(command[0], LS) == 0) {
         executeLs(command[2], command[1]);
     }
 
-    if(strcmp(command[0], "cd") == 0) {
+    if(strcmp(command[0], CD) == 0) {
         mycd(command[1]);
     }
 
-    if(strcmp(command[0], "cat") == 0) {
+    if(strcmp(command[0], CAT) == 0) {
         printf("\n%s\n",mycat(command[1]));
     }
 
-    if(strcmp(command[0], "rm") == 0) {
+    if(strcmp(command[0], RM) == 0) {
         myrm(command[1]);
     }
 
-    if(strcmp(command[0], "cp") == 0) {
+    if(strcmp(command[0], CP) == 0) {
         mycp(command[1], command[2]);
     }
 
-    if(strcmp(command[0], "mkdir") == 0) {
+    if(strcmp(command[0], MKDIR) == 0) {
         mymkdir(command[1]);
     }
 
-    if(strcmp(command[0], "rmdir") == 0) {
+    if(strcmp(command[0], RMDIR) == 0) {
         myrmdir(command[1]);
     }
 
-    if(strcmp(command[0], "exit") == 0) {
+    if(strcmp(command[0], EXIT) == 0) {
         exitShell();
+    }
+
+    if(strcmp(command[0], HELP) == 0) {
+        listCommands();
     }
 }

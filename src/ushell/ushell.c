@@ -8,23 +8,24 @@
 
 #include "parser.h"
 #include "CommandExecutor.h"
-#define GRN   "\x1B[32m"
-#define BLU   "\x1B[34m"
-#define RESET "\x1B[0m"
+#include "Colors.h"
+
 void show_command (command * C);
 
 int main ()
 {
     command C;
     int r;
+    // read current path
     char *path;
     long size = pathconf(".", _PC_PATH_MAX);
     char *buf = malloc(sizeof(char) * size);
 
     printf("Welcome to "GRN"λ"RESET"shell.\n > Advanced Operating Systems "BLU"uah."RESET"es");
+    printf(RESET"\nUse "GRN"'help'"RESET" to show all available commands.");
     printf (RESET"\nType commands (press Ctrl-D to finish)\n");
 
-    do              // Read commands and show them
+    do
     {
         init_command (&C);
         path = getcwd(buf, (size_t)size);

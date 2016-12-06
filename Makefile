@@ -15,6 +15,9 @@ directoryoperation.o:
 fileoperation.o:
 	gcc -Wall -c ./src/ushell/FileOperation.c
 
+commands.o:
+	gcc -Wall -c ./src/ushell/Commands.c
+
 internaloperation.o:
 	gcc -Wall -c ./src/ushell/InternalOperation.c
 
@@ -33,8 +36,8 @@ count.o:
 main: libcount.a main.o
 	gcc -o ./bin/count main.o libcount.a
 
-ushell: parser.o ushell.o commandexecutor.o pathoperation.o directoryoperation.o fileoperation.o internaloperation.o
-	gcc -o ./bin/ushell ushell.o parser.o CommandExecutor.o PathOperation.o DirectoryOperation.o FileOperation.o InternalOperation.o
+ushell: parser.o ushell.o commandexecutor.o pathoperation.o directoryoperation.o fileoperation.o internaloperation.o commands.o
+	gcc -o ./bin/ushell ushell.o parser.o CommandExecutor.o PathOperation.o DirectoryOperation.o FileOperation.o InternalOperation.o Commands.o
 
 
 libcount.a: readchar.o count.o
