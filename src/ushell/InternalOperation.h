@@ -10,4 +10,4 @@
 /*
  * Will end the execution of the µshell
  */
-void exit();
+void exitShell();

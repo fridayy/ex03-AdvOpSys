@@ -52,7 +52,7 @@ char *mycat(char *fileName) {
 
     if(fd == -1) {
         perror("File not found");
-        exit(EXIT_FAILURE);
+        return "\n";
     }
 
     int fileSize = getFilesize(fd);
@@ -60,7 +60,7 @@ char *mycat(char *fileName) {
 
     if(map == MAP_FAILED) {
         perror("Could not read file");
-        exit(EXIT_FAILURE);
+        return "\n";
     }
 
     char *returnValue = malloc(fileSize * sizeof(char));

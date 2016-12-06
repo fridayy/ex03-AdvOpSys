@@ -27,7 +27,7 @@ void test_mymkdirCreatesDirectoryCorrectly(void) {
 void test_mylsReturnsFiles(void) {
     mkdir("test", 0755);
     creat(".test/test0.txt", 0755);
-    dirEntry **entries = myls("test", NULL);
+    dirEntry **entries = myls("test");
 
     TEST_ASSERT_EQUAL(0, strcmp(entries[0]->name, ".."));
     TEST_ASSERT_EQUAL(0, strcmp(entries[1]->name, "test0.txt"));

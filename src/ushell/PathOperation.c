@@ -29,22 +29,21 @@ char identifyFileType(__mode_t mode) {
     return '?';
 }
 
-void setPermissions(__mode_t mode, dirEntry *entry) {
-    char str[10] = { '-', '-','-','-','-','-','-','-','-'};
+void setPermissions(__mode_t mode, char* permissions) {
     //user
-    if ( mode & S_IRUSR ) str[1] = 'r';
-    if ( mode & S_IWUSR ) str[2] = 'w';
-    if ( mode & S_IXUSR ) str[3] = 'x';
+    (mode & S_IRUSR ) ? permissions[1] = 'r' : '-';
+    ( mode & S_IWUSR ) ? permissions[2] = 'w' : '-';
+    ( mode & S_IXUSR ) ? permissions[3] = 'x' : '-';
     // group
-    if ( mode & S_IRGRP ) str[4] = 'r';
-    if ( mode & S_IWGRP ) str[5] = 'w';
-    if ( mode & S_IXGRP ) str[6] = 'x';
+    ( mode & S_IRGRP ) ? permissions[4] = 'r' : '-';
+    ( mode & S_IWGRP ) ? permissions[5] = 'w' : '-';
+    ( mode & S_IXGRP ) ? permissions[6] = 'x' : '-';
     //other
-    if ( mode & S_IROTH ) str[7] = 'r';
-    if ( mode & S_IWOTH ) str[8] = 'w';
-    if ( mode & S_IXOTH ) str[9] = 'x';
-    str[10] = '\0';
-    entry->permissions = str;
+    ( mode & S_IROTH ) ? permissions[7] = 'r' : '-';
+    ( mode & S_IWOTH ) ? permissions[8] = 'w' : '-';
+    ( mode & S_IXOTH ) ? permissions[9] = 'x' : '-';
+    permissions[10] = '\0';
+    permissions[0] = '-';
 }
 
 char *mypwd() {
@@ -56,8 +55,12 @@ char *mypwd() {
     return path;
 }
 
-dirEntry** myls(char *directory, char *arguments) {
+dirEntry** myls(char *directory) {
     DIR *dp = opendir(directory);
+
+    if(dp == NULL) {
+        dp = opendir(mypwd());
+    }
     struct dirent *entry;
     dirEntry** dirEntries = malloc(sizeof(*dirEntries) * USHRT_MAX);
 
@@ -75,7 +78,7 @@ dirEntry** myls(char *directory, char *arguments) {
         dirEntries[counter]->size = fileinfo.st_size;
         dirEntries[counter]->lastModified = fileinfo.st_mtim.tv_sec;
         dirEntries[counter]->type = identifyFileType(fileinfo.st_mode);
-        setPermissions(fileinfo.st_mode, dirEntries[counter]);
+        setPermissions(fileinfo.st_mode, dirEntries[counter]->permissions);
 
         counter++;
     }

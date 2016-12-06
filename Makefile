@@ -1,4 +1,25 @@
-all: test_open test_read test_write test_lseek test_mmap test_close test_open_4 test_readchar test_count libcount.a main test_fileoperation test_directoryoperation test_pathoperation
+all: test_open test_read test_write test_lseek test_mmap test_close test_open_4 test_readchar test_count libcount.a main test_fileoperation test_directoryoperation test_pathoperation ushell
+
+ushell.o:
+	gcc -Wall -c ./src/ushell/ushell.c
+
+parser.o:
+	gcc -Wall -c ./src/ushell/parser.c
+
+pathoperation.o:
+	gcc -Wall -c ./src/ushell/PathOperation.c
+
+directoryoperation.o:
+	gcc -Wall -c ./src/ushell/DirectoryOperation.c
+
+fileoperation.o:
+	gcc -Wall -c ./src/ushell/FileOperation.c
+
+internaloperation.o:
+	gcc -Wall -c ./src/ushell/InternalOperation.c
+
+commandexecutor.o:
+	gcc -Wall -c ./src/ushell/CommandExecutor.c
 
 main.o:
 	gcc -Wall -c ./src/count/main.c
@@ -11,6 +32,10 @@ count.o:
 
 main: libcount.a main.o
 	gcc -o ./bin/count main.o libcount.a
+
+ushell: parser.o ushell.o commandexecutor.o pathoperation.o directoryoperation.o fileoperation.o internaloperation.o
+	gcc -o ./bin/ushell ushell.o parser.o CommandExecutor.o PathOperation.o DirectoryOperation.o FileOperation.o InternalOperation.o
+
 
 libcount.a: readchar.o count.o
 	ar -rv libcount.a readchar_R.o count_M.o

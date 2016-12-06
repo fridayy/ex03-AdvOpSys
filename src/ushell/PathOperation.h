@@ -14,9 +14,9 @@
 char * mypwd();
 
 /*
- * Lists the entries of a directory with optional arguments like -l
+ * Lists the entries of a directory
  */
-dirEntry** myls(char *directory, char* arguments);
+dirEntry** myls(char *directory);
 
 
 /*

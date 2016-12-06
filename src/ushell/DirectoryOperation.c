@@ -7,7 +7,7 @@
 #include <sys/types.h>
 
 int mymkdir(char *directoryName) {
-    return
+    return mkdir(directoryName, 0755);
 }
 
 int myrmdir(char *directoryName) {

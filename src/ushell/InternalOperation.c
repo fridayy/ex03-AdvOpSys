@@ -1,6 +1,8 @@
 //
 // Created by bnjm on 12/6/16.
 //
-void exit() {
+#include <stdio.h>
+#include <stdlib.h>
+void exitShell() {
     exit(EXIT_SUCCESS);
 }
