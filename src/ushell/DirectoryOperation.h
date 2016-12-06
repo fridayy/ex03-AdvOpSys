@@ -10,10 +10,10 @@
 /*
  * Creates a directory with the name passed as argument
  */
-void mymkdir(char *directoryName);
+int mymkdir(char *directoryName);
 
 
 /*
  * Deletes the directory passed as argument
  */
-void myrmdir(char *directoryName);
+int myrmdir(char *directoryName);

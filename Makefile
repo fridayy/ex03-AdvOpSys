@@ -1,4 +1,4 @@
-all: test_open test_read test_write test_lseek test_mmap test_close test_open_4 test_readchar test_count libcount.a main test_fileoperation
+all: test_open test_read test_write test_lseek test_mmap test_close test_open_4 test_readchar test_count libcount.a main test_fileoperation test_directoryoperation
 
 main.o:
 	gcc -Wall -c ./src/count/main.c
@@ -14,6 +14,9 @@ main: libcount.a main.o
 
 libcount.a: readchar.o count.o
 	ar -rv libcount.a readchar_R.o count_M.o
+
+test_directoryoperation:
+	gcc -Wall ./test/ushell/TestDirectoryOperation.c ./src/ushell/DirectoryOperation.c ./test/TestFileHelper.c ./test/unity/unity.c -o bin/TestDirectoryOperation
 
 test_fileoperation:
 	gcc -Wall ./test/ushell/TestFileOperation.c ./src/ushell/FileOperation.c ./test/TestFileHelper.c ./test/unity/unity.c -o bin/TestFileOperation
@@ -47,6 +50,6 @@ test_open_4:
 
 clean:
 	rm -f ./test/*.o
-	rm -f ./bin/*
+	rm -rf ./bin/*
 	rm -f ./*.o
 	rm -f ./*.a
