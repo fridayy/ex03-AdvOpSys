@@ -50,20 +50,27 @@ printf "\n${RED}>> TEST PATH OPERTIONS \n${NC}"
 
 if [ $1 == "all" ]
 then
+    clean
+    makeAll
+    syscalltests
+    exercise2tests
+    shelltests
+fi
+
+if [ $1 == "tests" ]
+then
+    clean
     makeAll
     syscalltests
     exercise2tests
     shelltests
     clean
-else
-    echo "Unknown argument"
 fi
+
 
 if [ $1 == "assemble" ]
 then
-    makeAll
     clean
-else
-    echo "Unknown argument"
+    makeAll
 fi
 
