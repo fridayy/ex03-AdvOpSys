@@ -14,6 +14,8 @@
 #include <sys/types.h>
 #include <fcntl.h>
 
+char *testDir = "./bin/test";
+
 void test_mymkdirCreatesDirectoryCorrectly(void) {
     char *path;
     long size = pathconf(".", _PC_PATH_MAX);
@@ -25,24 +27,24 @@ void test_mymkdirCreatesDirectoryCorrectly(void) {
 }
 
 void test_mylsReturnsFiles(void) {
-    mkdir("test", 0755);
-    creat(".test/test0.txt", 0755);
-    dirEntry **entries = myls("test");
+    mkdir(testDir, 0755);
+    creat("./bin/test/test0.txt", 0755);
+    dirEntry **entries = myls(testDir);
 
     TEST_ASSERT_EQUAL(0, strcmp(entries[0]->name, ".."));
     TEST_ASSERT_EQUAL(0, strcmp(entries[1]->name, "test0.txt"));
     TEST_ASSERT_EQUAL(0, strcmp(entries[2]->name, "."));
-    rmdir("test");
+    rmdir(testDir);
 }
 
 void test_mycdReturns0WhenChangingIntoDirectory(void) {
-    mkdir("test", 0755);
-    TEST_ASSERT_EQUAL(0, mycd("test"));
-    rmdir("test");
+    mkdir(testDir, 0755);
+    TEST_ASSERT_EQUAL(0, mycd(testDir));
+    rmdir(testDir);
 }
 
 void test_mycdReturnsErrorWhenCDIntoNonExistantDirectory(void) {
-    TEST_ASSERT_EQUAL(-1, mycd("test"));
+    TEST_ASSERT_EQUAL(-1, mycd(testDir));
 }
 
 int main(void) {

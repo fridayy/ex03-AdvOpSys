@@ -13,28 +13,30 @@
 #include <sys/stat.h>
 #include <sys/types.h>
 
-void test_mymkdirCreatesDirectoryCorrectly(void) {
-    TEST_ASSERT_EQUAL(0, mymkdir("test"));
+char *testDir = "./bin/test";
 
-    DIR *dir = opendir("test");
+void test_mymkdirCreatesDirectoryCorrectly(void) {
+    TEST_ASSERT_EQUAL(0, mymkdir(testDir));
+
+    DIR *dir = opendir(testDir);
     TEST_ASSERT_NOT_EQUAL(NULL, dir);
     if(dir != NULL) {
         closedir(dir);
     }
 
-    rmdir("test");
+    rmdir(testDir);
 }
 
 void test_mymkdirReturnsErrorIfDirectoryAlreadyExists(void) {
-    TEST_ASSERT_EQUAL(0, mymkdir("test"));
-    TEST_ASSERT_EQUAL(-1, mymkdir("test"));
+    TEST_ASSERT_EQUAL(0, mymkdir(testDir));
+    TEST_ASSERT_EQUAL(-1, mymkdir(testDir));
 
-    rmdir("test");
+    rmdir(testDir);
 }
 
 void test_myrmdirRemovesDirectoryCorrectly(void) {
-    mkdir("test", 0755);
-    TEST_ASSERT_EQUAL(0, myrmdir("test"));
+    mkdir(testDir, 0755);
+    TEST_ASSERT_EQUAL(0, myrmdir(testDir));
 }
 
 void test_myrmdirOnFilesReturnsError(void) {

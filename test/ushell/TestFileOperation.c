@@ -77,6 +77,7 @@ void test_mycatShowsFileContents(void) {
 
     char *mycatReturnValue = mycat(fileName);
     TEST_ASSERT_EQUAL(0, strcmp(content, mycatReturnValue));
+    remove(fileName);
 }
 
 void test_mycatThrowsError(void) {
