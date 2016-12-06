@@ -7,15 +7,16 @@
 
 #endif //LABEXERCISE3_PATHOPERATION_H
 
+#include "dirEntry.h"
 /*
  * Shows the full path and name of the current directory
  */
 char * mypwd();
 
 /*
- * Lists the entries of a directory
+ * Lists the entries of a directory with optional arguments like -l
  */
-char * myls();
+dirEntry** myls(char *directory, char* arguments);
 
 
 /*
@@ -23,4 +24,4 @@ char * myls();
  * If no argument is specified (null) the shell will change in the directory
  * it was initially launched from
  */
-void mycd(char *directory);
+int mycd(char *directory);
