@@ -5,7 +5,7 @@
 *.ipr
 
 ### CMakeLists ###
-CMakeLists.txt
+.CMakeLists.txt
 
 ### BINARIES ###
 .test/bin/

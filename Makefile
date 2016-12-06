@@ -1,4 +1,4 @@
-all: test_open test_read test_write test_lseek test_mmap test_close test_open_4 test_readchar test_count libcount.a main
+all: test_open test_read test_write test_lseek test_mmap test_close test_open_4 test_readchar test_count libcount.a main test_fileoperation
 
 main.o:
 	gcc -Wall -c ./src/count/main.c
@@ -14,6 +14,9 @@ main: libcount.a main.o
 
 libcount.a: readchar.o count.o
 	ar -rv libcount.a readchar_R.o count_M.o
+
+test_fileoperation:
+	gcc -Wall ./test/ushell/TestFileOperation.c ./src/ushell/FileOperation.c ./test/TestFileHelper.c ./test/unity/unity.c -o bin/TestFileOperation
 
 test_count:
 	gcc -Wall ./test/TestCount_M.c ./test/TestFileHelper.c ./src/count/count_M.c ./test/unity/unity.c -o bin/TestCount_M
