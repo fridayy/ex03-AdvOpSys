@@ -12,14 +12,18 @@
 
 void show_command (command * C);
 
+char * getCurrentPath() {
+    long size = pathconf(".", _PC_PATH_MAX);
+    char *buf = malloc(sizeof(char) * size);
+
+    return getcwd(buf, (size_t) size);
+}
+
 int main ()
 {
     command C;
     int r;
-    // read current path
-    char *path;
-    long size = pathconf(".", _PC_PATH_MAX);
-    char *buf = malloc(sizeof(char) * size);
+
 
     printf("Welcome to "GRN"λ"RESET"shell.\n > Advanced Operating Systems "BLU"uah."RESET"es");
     printf(RESET"\nUse "GRN"'help'"RESET" to show all available commands.");
@@ -28,7 +32,7 @@ int main ()
     do
     {
         init_command (&C);
-        path = getcwd(buf, (size_t)size);
+        char * path = getCurrentPath();
         printf (GRN"%s ~ λ " RESET, path);
         r = read_command (&C, stdin);
 

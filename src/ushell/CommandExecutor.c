@@ -44,8 +44,8 @@ void renderLsCommand(dirEntry **entries, char *arguments) {
         } else if(strcmp("-l", arguments) == 0) {
             printLsExtended(entries[counter]);
         } else {
-            printf("Unknown argument.");
-            break;
+            printf("Unknown argument.\n");
+            return;
         }
         counter++;
     }
@@ -74,41 +74,53 @@ void executeLs(char *directory, char* arguments) {
 void executeCommand(char **command) {
     if(strcmp(command[0], PWD) == 0) {
         executePwd();
+        return;
     }
 
     if(strcmp(command[0], LS) == 0) {
         executeLs(command[2], command[1]);
+        return;
     }
 
     if(strcmp(command[0], CD) == 0) {
         mycd(command[1]);
+        return;
     }
 
     if(strcmp(command[0], CAT) == 0) {
         printf("\n%s\n",mycat(command[1]));
+        return;
     }
 
     if(strcmp(command[0], RM) == 0) {
         myrm(command[1]);
+        return;
     }
 
     if(strcmp(command[0], CP) == 0) {
         mycp(command[1], command[2]);
+        return;
     }
 
     if(strcmp(command[0], MKDIR) == 0) {
         mymkdir(command[1]);
+        return;
     }
 
     if(strcmp(command[0], RMDIR) == 0) {
         myrmdir(command[1]);
+        return;
     }
 
     if(strcmp(command[0], EXIT) == 0) {
         exitShell();
+        return;
     }
 
     if(strcmp(command[0], HELP) == 0) {
         listCommands();
+        return;
     }
+
+    printf("Unknown command.\n");
 }
