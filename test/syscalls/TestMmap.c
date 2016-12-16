@@ -1,8 +1,8 @@
 //
 // Created by bnjm on 12/5/16.
 //
-#include "TestFileHelper.h"
-#include "unity/unity.h"
+#include "../TestFileHelper.h"
+#include "../unity/unity.h"
 #include <sys/types.h>
 #include <unistd.h>
 #include <fcntl.h>

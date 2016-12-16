@@ -1,9 +1,9 @@
 //
 // Created by bnjm on 12/4/16.
 //
-#include "unity/unity.h"
+#include "../unity/unity.h"
 #include <fcntl.h>
-#include "TestFileHelper.h"
+#include "../TestFileHelper.h"
 #include <unistd.h>
 
 void test_PlainOpenWithInvalidPath(void) {

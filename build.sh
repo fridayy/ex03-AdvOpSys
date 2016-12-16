@@ -74,3 +74,8 @@ then
     makeAll
 fi
 
+if [ $1 == "clean" ]
+then
+    clean
+fi
+

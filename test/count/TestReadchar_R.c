@@ -1,11 +1,11 @@
 //
 // Created by bnjm on 12/5/16.
 //
-#include "unity/unity.h"
+#include "../unity/unity.h"
 #include <unistd.h>
 #include <fcntl.h>
-#include "TestFileHelper.h"
-#include "../src/count/readchar_R.h"
+#include "../TestFileHelper.h"
+#include "../../src/count/readchar_R.h"
 
 void test_ReadCharacterHappyPath(void) {
     char *fileName = createFileWithContent("test.txt", "this is a test!");

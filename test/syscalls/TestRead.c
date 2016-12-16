@@ -1,10 +1,10 @@
 //
 // Created by bnjm on 12/4/16.
 //
-#include "unity/unity.h"
+#include "../unity/unity.h"
 #include <unistd.h>
 #include <fcntl.h>
-#include "TestFileHelper.h"
+#include "../TestFileHelper.h"
 
 void test_ReadBytesFromFile(void) {
     char *fileName = createTestFileWithContent(500, "500bytes.txt");
@@ -58,6 +58,7 @@ void test_ReadFromSameFileDescriptor(void) {
     printf("RESULTS IN UNEXPECTED BEHAVIOR!");
     TEST_ASSERT_EQUAL(10, bytesRead1);
     TEST_ASSERT_EQUAL(5, bytesRead2);
+
 }
 
 void test_ReadUsingTwoDifferentDescriptors(void) {

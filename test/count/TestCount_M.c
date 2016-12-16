@@ -1,11 +1,11 @@
 //
 // Created by bnjm on 12/5/16.
 //
-#include "TestFileHelper.h"
-#include "unity/unity.h"
+#include "../TestFileHelper.h"
+#include "../unity/unity.h"
 #include <unistd.h>
 #include <fcntl.h>
-#include "../src/count/count_M.h"
+#include "../../src/count/count_M.h"
 
 void test_CountCharactersHappyPath(void) {
     char *fileName = createFileWithContent("test.txt", "this is a test!");

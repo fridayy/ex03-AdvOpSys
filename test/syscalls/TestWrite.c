@@ -3,8 +3,8 @@
 //
 #include <fcntl.h>
 #include <unistd.h>
-#include "unity/unity.h"
-#include "TestFileHelper.h"
+#include "../unity/unity.h"
+#include "../TestFileHelper.h"
 
 void test_OverwriteSomeBytesInAFile(void) {
     char *fileName = createTestFileWithContent(5, "overrideme.txt");
