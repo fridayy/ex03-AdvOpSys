@@ -7,7 +7,6 @@
 #include "InternalOperation.h"
 #include <stdio.h>
 #include <string.h>
-#include <stdio.h>
 
 #include "Commands.h"
 #include "Colors.h"
@@ -29,11 +28,17 @@ void printLsSimple(dirEntry *entry) {
 
 void printLsExtended(dirEntry *entry) {
     if(entry->type == 'd')
-        printf(RESET "%10s  %1c  %5d  %5d  %5d  %5ld" BLU  " %2s\n", entry->permissions, entry->type, entry->uid, entry->gid, entry->size, entry->lastModified, entry->name);
+        printf(RESET "%10s  %1c  %5d  %5d  %5d  %5ld" BLU  " %2s\n",
+               entry->permissions, entry->type, entry->uid, entry->gid,
+               entry->size, entry->lastModified, entry->name);
     else if (entry->type == 'f')
-        printf(RESET "%10s  %1c  %5d  %5d  %5d  %5ld" GRN  " %2s\n", entry->permissions, entry->type, entry->uid, entry->gid, entry->size, entry->lastModified, entry->name);
+        printf(RESET "%10s  %1c  %5d  %5d  %5d  %5ld" GRN  " %2s\n",
+               entry->permissions, entry->type, entry->uid, entry->gid,
+               entry->size, entry->lastModified, entry->name);
     else
-        printf(RESET "%10s  %1c  %5d  %5d  %5d  %5ld  %s\n", entry->permissions, entry->type, entry->uid, entry->gid, entry->size, entry->lastModified, entry->name);
+        printf(RESET "%10s  %1c  %5d  %5d  %5d  %5ld  %s\n",
+               entry->permissions, entry->type, entry->uid, entry->gid,
+               entry->size, entry->lastModified, entry->name);
 }
 
 void renderLsCommand(dirEntry **entries, char *arguments) {
@@ -72,6 +77,10 @@ void executeLs(char *directory, char* arguments) {
 
 
 void executeCommand(char **command) {
+    if(command == NULL) {
+        return;
+    }
+
     if(strcmp(command[0], PWD) == 0) {
         executePwd();
         return;

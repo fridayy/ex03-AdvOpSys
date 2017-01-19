@@ -19,7 +19,7 @@ void test_PlainOpenWithValidPath(void) {
 }
 
 void test_PlainOpenWithPrivileges(void) {
-    TEST_ASSERT(open("test.txt", O_CREAT, S_IRUSR) > 0);
+    TEST_ASSERT(open("test.txt", O_CREAT) > 0);
     TEST_ASSERT_EQUAL(-1, open("test.txt", O_RDWR));
     // Remove the created file again.
     remove("test.txt");

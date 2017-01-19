@@ -48,6 +48,12 @@ printf "\n${RED}>> TEST PATH OPERTIONS \n${NC}"
 ./bin/TestPathOperation
 }
 
+if [ -z "$1" ]
+then
+    echo "available commands 'all' 'tests' 'assemble' 'clean'"
+    exit
+fi
+
 if [ $1 == "all" ]
 then
     clean

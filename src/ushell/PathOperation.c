@@ -3,12 +3,9 @@
 //
 #include <stdlib.h>
 #include <unistd.h>
-#include <stdio.h>
 #include <dirent.h>
 #include "PathOperation.h"
-#include <sys/types.h>
 #include <sys/stat.h>
-#include <unistd.h>
 //#include "dirEntry.h"
 
 char identifyFileType(__mode_t mode) {
@@ -31,7 +28,7 @@ char identifyFileType(__mode_t mode) {
 
 void setPermissions(__mode_t mode, char* permissions) {
     //user
-    (mode & S_IRUSR ) ? permissions[1] = 'r' : '-';
+    ( mode & S_IRUSR ) ? permissions[1] = 'r' : '-';
     ( mode & S_IWUSR ) ? permissions[2] = 'w' : '-';
     ( mode & S_IXUSR ) ? permissions[3] = 'x' : '-';
     // group

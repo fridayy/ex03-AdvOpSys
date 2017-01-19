@@ -23,13 +23,13 @@ int getFilesize(int fd) {
 
 int mycp(char *source, char *target) {
     int fdSource = open(source, O_RDONLY);
-    char *readBuffer = malloc(sizeof(char) * 1024);
+    char *readBuffer = malloc(sizeof(char) * 1024 << 10);
 
     int fileSize = getFilesize(fdSource);
     ssize_t byesRead = read(fdSource, readBuffer, fileSize);
 
     int fdTarget = open(target, O_RDWR|O_CREAT, 0644);
-    char *writeBuffer = malloc(sizeof(char) * 1024);
+    char *writeBuffer = malloc(sizeof(char) * 1024 << 10);
     writeBuffer = strcpy(writeBuffer, readBuffer);
     ssize_t bytesWritten = write(fdTarget, writeBuffer, fileSize);
 

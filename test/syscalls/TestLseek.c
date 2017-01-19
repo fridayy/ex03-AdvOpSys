@@ -4,6 +4,8 @@
 #include "../TestFileHelper.h"
 #include "../unity/unity.h"
 #include <sys/types.h>
+#include <stdlib.h>
+#include <stdio.h>
 #include <unistd.h>
 #include <fcntl.h>
 

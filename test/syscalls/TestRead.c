@@ -2,9 +2,9 @@
 // Created by bnjm on 12/4/16.
 //
 #include "../unity/unity.h"
+#include "../TestFileHelper.h"
 #include <unistd.h>
 #include <fcntl.h>
-#include "../TestFileHelper.h"
 
 void test_ReadBytesFromFile(void) {
     char *fileName = createTestFileWithContent(500, "500bytes.txt");
@@ -32,7 +32,7 @@ void test_TryToReadTooManyBytes(void) {
 
 void test_ReadEmptyFile(void) {
     char *fileName = "emptyfile.txt";
-    int fd = open(fileName, O_CREAT, S_IRUSR);
+    int fd = open(fileName, O_CREAT);
     char buffer[100];
     ssize_t bytesRead = read(fd, buffer, 100);
     close(fd);
